@@ -1,0 +1,122 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>HH4X - Regedit iOS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" href="hh4x-icon.png">
+  <style>
+    body {
+      background: #000;
+      color: #00ff99;
+      font-family: 'Courier New', Courier, monospace;
+      padding: 30px;
+      text-align: center;
+    }
+    h1 {
+      color: #ff3366;
+      text-shadow: 0 0 10px #ff3366, 0 0 20px #ff3366;
+      font-size: 28px;
+    }
+    .option {
+      margin: 10px;
+      font-size: 16px;
+    }
+    input[type="checkbox"] {
+      transform: scale(1.2);
+      margin-right: 8px;
+    }
+    .btn {
+      margin-top: 25px;
+      padding: 12px 30px;
+      background: linear-gradient(45deg, #00ff99, #00ccff);
+      border: none;
+      font-weight: bold;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .loading, .success {
+      margin-top: 25px;
+      font-size: 16px;
+      display: none;
+    }
+    .success {
+      color: #00ff00;
+      font-weight: bold;
+      animation: glow 1s infinite alternate;
+    }
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #00ff00; }
+      to { text-shadow: 0 0 20px #00ff00; }
+    }
+    progress {
+      width: 80%;
+      height: 16px;
+      border-radius: 10px;
+      background: #222;
+    }
+    progress::-webkit-progress-value {
+      background: #00ff99;
+      border-radius: 10px;
+    }
+    progress::-webkit-progress-bar {
+      background: #111;
+      border-radius: 10px;
+    }
+    img {
+      width: 100px;
+      border-radius: 50%;
+      margin: 20px auto;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <img src="hh4x-icon.png" alt="HH4X Icon">
+  <h1>HH4X | Regedit iOS Pro</h1>
+
+  <div class="option"><input type="checkbox"> Auto Headshot</div>
+  <div class="option"><input type="checkbox"> No Recoil</div>
+  <div class="option"><input type="checkbox"> Aim Assist</div>
+  <div class="option"><input type="checkbox"> Full Đỏ V2</div>
+  <div class="option"><input type="checkbox"> Xuyên Tường</div>
+
+  <button class="btn" onclick="startFakeHack()">🚀 KÍCH HOẠT</button>
+
+  <div class="loading" id="loading">
+    <p>🔄 Đang xử lý cấu hình...</p>
+    <progress max="100" value="0" id="progressBar"></progress>
+  </div>
+
+  <div class="success" id="success">
+    ✅ KÍCH HOẠT THÀNH CÔNG!<br>
+    📌 Regedit đã áp dụng thành công cho iOS.
+  </div>
+
+  <script>
+    function startFakeHack() {
+      const loading = document.getElementById('loading');
+      const success = document.getElementById('success');
+      const bar = document.getElementById('progressBar');
+      let value = 0;
+      loading.style.display = 'block';
+      success.style.display = 'none';
+      bar.value = 0;
+
+      let interval = setInterval(() => {
+        if (value >= 100) {
+          clearInterval(interval);
+          loading.style.display = 'none';
+          success.style.display = 'block';
+        } else {
+          value += 4;
+          bar.value = value;
+        }
+      }, 120);
+    }
+  </script>
+</body>
+</html>
