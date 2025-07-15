@@ -1,0 +1,16 @@
+
+{
+  "name": "HH4X",
+  "short_name": "HH4X",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#00ff99",
+  "icons": [
+    {
+      "src": "hh4x-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}
