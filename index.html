@@ -3,7 +3,7 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>HH4X - Regedit iOS</title>
+  <title>HH4X - Đăng nhập</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="manifest" href="manifest.json">
   <link rel="icon" type="image/png" href="hh4x-icon.png">
@@ -12,45 +12,46 @@
       background: #000;
       color: #00ff99;
       font-family: 'Courier New', Courier, monospace;
-      padding: 30px;
+      padding: 40px;
       text-align: center;
     }
-    h1 {
-      color: #ff3366;
-      text-shadow: 0 0 10px #ff3366, 0 0 20px #ff3366;
-      font-size: 28px;
+    img {
+      width: 100px;
+      margin-bottom: 20px;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #00ff99;
     }
-    .option {
-      margin: 10px;
+    .login-box {
+      margin-top: 50px;
+    }
+    input[type="password"] {
+      padding: 10px;
       font-size: 16px;
-    }
-    input[type="checkbox"] {
-      transform: scale(1.2);
-      margin-right: 8px;
+      border: none;
+      border-radius: 6px;
+      width: 200px;
+      text-align: center;
     }
     .btn {
-      margin-top: 25px;
-      padding: 12px 30px;
+      margin-top: 15px;
+      padding: 10px 25px;
+      font-size: 16px;
       background: linear-gradient(45deg, #00ff99, #00ccff);
       border: none;
-      font-weight: bold;
-      font-size: 16px;
-      border-radius: 8px;
+      border-radius: 6px;
       cursor: pointer;
-    }
-    .loading, .success {
-      margin-top: 25px;
-      font-size: 16px;
-      display: none;
-    }
-    .success {
-      color: #00ff00;
       font-weight: bold;
-      animation: glow 1s infinite alternate;
     }
-    @keyframes glow {
-      from { text-shadow: 0 0 10px #00ff00; }
-      to { text-shadow: 0 0 20px #00ff00; }
+    .btn:hover {
+      transform: scale(1.05);
+    }
+    .error {
+      color: red;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+    #app-content {
+      display: none;
     }
     progress {
       width: 80%;
@@ -66,37 +67,54 @@
       background: #111;
       border-radius: 10px;
     }
-    img {
-      width: 100px;
-      border-radius: 50%;
-      margin: 20px auto;
-      display: block;
-    }
   </style>
 </head>
 <body>
-  <img src="hh4x-icon.png" alt="HH4X Icon">
+  <img src="hh4x-icon.png" alt="Icon">
   <h1>HH4X | Regedit iOS Pro</h1>
 
-  <div class="option"><input type="checkbox"> Auto Headshot</div>
-  <div class="option"><input type="checkbox"> No Recoil</div>
-  <div class="option"><input type="checkbox"> Aim Assist</div>
-  <div class="option"><input type="checkbox"> Full Đỏ V2</div>
-  <div class="option"><input type="checkbox"> Xuyên Tường</div>
-
-  <button class="btn" onclick="startFakeHack()">🚀 KÍCH HOẠT</button>
-
-  <div class="loading" id="loading">
-    <p>🔄 Đang xử lý cấu hình...</p>
-    <progress max="100" value="0" id="progressBar"></progress>
+  <div id="login" class="login-box">
+    <p>🔐 Vui lòng nhập KEY để tiếp tục:</p>
+    <input type="password" id="keyInput" placeholder="Nhập key...">
+    <br>
+    <button class="btn" onclick="checkKey()">Đăng nhập</button>
+    <div class="error" id="errorMsg"></div>
   </div>
 
-  <div class="success" id="success">
-    ✅ KÍCH HOẠT THÀNH CÔNG!<br>
-    📌 Regedit đã áp dụng thành công cho iOS.
+  <div id="app-content">
+    <h2>🔫 Kích hoạt Regedit</h2>
+    <div><input type="checkbox"> Auto Headshot</div>
+    <div><input type="checkbox"> No Recoil</div>
+    <div><input type="checkbox"> Aim Assist</div>
+    <div><input type="checkbox"> Full Đỏ V2</div>
+    <div><input type="checkbox"> Xuyên Tường</div>
+
+    <button class="btn" onclick="startFakeHack()">🚀 KÍCH HOẠT</button>
+
+    <div class="loading" id="loading">
+      <p>🔄 Đang xử lý cấu hình...</p>
+      <progress max="100" value="0" id="progressBar"></progress>
+    </div>
+
+    <div class="success" id="success" style="display:none; color: #00ff00; font-weight: bold; margin-top: 20px;">
+      ✅ KÍCH HOẠT THÀNH CÔNG!<br>
+      📌 Regedit đã áp dụng thành công.
+    </div>
   </div>
 
   <script>
+    const correctKey = "giakhanhios";
+    function checkKey() {
+      const userInput = document.getElementById("keyInput").value;
+      const error = document.getElementById("errorMsg");
+      if (userInput === correctKey) {
+        document.getElementById("login").style.display = "none";
+        document.getElementById("app-content").style.display = "block";
+      } else {
+        error.textContent = "❌ Sai key. Vui lòng thử lại.";
+      }
+    }
+
     function startFakeHack() {
       const loading = document.getElementById('loading');
       const success = document.getElementById('success');
