@@ -3,71 +3,137 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lời hỏi dễ thương 💖</title>
+<title>Lời gửi đến bạn gái 💌</title>
 <style>
+    /* Toàn bộ bố cục và màu nền */
     body {
-        font-family: 'Comic Sans MS', cursive;
-        background: linear-gradient(135deg, #ffb6c1, #ffd6e7);
+        margin: 0;
+        height: 100vh;
         display: flex;
-        flex-direction: column;
         justify-content: center;
         align-items: center;
-        height: 100vh;
+        flex-direction: column;
+        background: linear-gradient(135deg, #ffe6f0, #fddde6, #fff0f5);
+        font-family: 'Poppins', sans-serif;
+        overflow: hidden;
+    }
+
+    /* Khung chính */
+    .container {
+        background: #fff;
+        padding: 40px 50px;
+        border-radius: 25px;
+        box-shadow: 0 8px 25px rgba(255, 105, 180, 0.3);
         text-align: center;
+        max-width: 90%;
+        width: 400px;
+        animation: fadeIn 1s ease;
     }
+
     h1 {
-        color: #ff007f;
-        font-size: 28px;
-        margin-bottom: 40px;
+        color: #ff1493;
+        font-size: 24px;
+        margin-bottom: 35px;
+        line-height: 1.5;
     }
+
+    /* Nút bấm */
     button {
         font-size: 18px;
-        padding: 10px 20px;
-        margin: 10px;
+        padding: 12px 25px;
         border: none;
         border-radius: 10px;
         cursor: pointer;
-        transition: 0.3s;
+        margin: 10px;
+        transition: all 0.3s ease;
+        font-weight: 600;
     }
+
     #yesBtn {
-        background-color: #ff69b4;
+        background-color: #ffb6c1;
         color: white;
     }
-    #yesBtn:hover {
+
+    #noBtn {
+        background-color: #ff69b4;
+        color: white;
+        position: absolute;
+    }
+
+    #noBtn:hover {
         background-color: #ff1493;
         transform: scale(1.1);
     }
-    #noBtn {
-        background-color: #d3d3d3;
-        color: #333;
-        position: absolute;
+
+    /* Hiệu ứng mở đầu */
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Hiệu ứng trái tim bay */
+    .heart {
+        position: fixed;
+        bottom: 0;
+        color: #ff66b2;
+        font-size: 20px;
+        animation: floatUp 4s linear infinite;
+        opacity: 0.8;
+    }
+
+    @keyframes floatUp {
+        0% { transform: translateY(0) scale(1); opacity: 1; }
+        100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
     }
 </style>
 </head>
 <body>
 
-<h1>💌 Hello bạn gái tôi, nếu bạn cần tôi hãy tắt chế độ không làm phiền 💌</h1>
-<div>
-    <button id="yesBtn">Có 💖</button>
-    <button id="noBtn">Không 😝</button>
+<div class="container" id="mainBox">
+    <h1>💌 GỬI ĐẾN BẠN GÁI TÔI – ĐỖ NGỌC CHÂU 💌<br><br>
+    BẠN CÓ THẤY BTRAI BẠN PHIỀN KHÔNG?</h1>
+    <div>
+        <button id="yesBtn">CÓ 😝</button>
+        <button id="noBtn">KHÔNG 💖</button>
+    </div>
 </div>
 
 <script>
     const yesBtn = document.getElementById("yesBtn");
     const noBtn = document.getElementById("noBtn");
+    const container = document.getElementById("mainBox");
 
-    yesBtn.addEventListener("click", () => {
-        document.body.innerHTML = `
-            <h1 style="color:#ff1493;">🎉 Thành công rồi đó nhaaa 💕</h1>
-            <p style="font-size:20px;">Bạn gái tôi đã tắt chế độ “Không làm phiền” rồi 😘</p>
-        `;
+    // Nút CÓ — mỗi lần bấm sẽ nhảy lung tung
+    yesBtn.addEventListener("mouseover", () => {
+        const x = Math.random() * (window.innerWidth - yesBtn.offsetWidth);
+        const y = Math.random() * (window.innerHeight - yesBtn.offsetHeight);
+        yesBtn.style.position = "absolute";
+        yesBtn.style.left = `${x}px`;
+        yesBtn.style.top = `${y}px`;
     });
 
-    noBtn.addEventListener("mouseover", () => {
-        const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
-        const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
-        noBtn.style.left = `${x}px`;
-        noBtn.style.top = `${y}px`;
+    // Nút KHÔNG — khi bấm thì hiển thị trang cảm ơn đáng yêu
+    noBtn.addEventListener("click", () => {
+        container.innerHTML = `
+            <h1 style="color:#ff1493;">💖 CẢM ƠN BẠN GÁI TÔI 💖</h1>
+            <p style="font-size:18px; color:#ff69b4;">
+                Cảm ơn vì đã không thấy tôi phiền nhaaa 😳<br>
+                Tôi hứa sẽ càng dễ thương hơn để bạn không thấy phiền nữa 💕
+            </p>
+            <p style="font-size:22px;">🥰💞💐💞🥰</p>
+        `;
+
+        // Tạo hiệu ứng trái tim bay
+        for (let i = 0; i < 20; i++) {
+            let heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.innerHTML = "💗";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = (2 + Math.random() * 3) + "s";
+            document.body.appendChild(heart);
+
+            setTimeout(() => heart.remove(), 4000);
+        }
     });
 </script>
 
