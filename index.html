@@ -1,140 +1,75 @@
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <title>HH4X - Đăng nhập</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="manifest" href="manifest.json">
-  <link rel="icon" type="image/png" href="hh4x-icon.png">
-  <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lời hỏi dễ thương 💖</title>
+<style>
     body {
-      background: #000;
-      color: #00ff99;
-      font-family: 'Courier New', Courier, monospace;
-      padding: 40px;
-      text-align: center;
+        font-family: 'Comic Sans MS', cursive;
+        background: linear-gradient(135deg, #ffb6c1, #ffd6e7);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        text-align: center;
     }
-    img {
-      width: 100px;
-      margin-bottom: 20px;
-      border-radius: 50%;
-      box-shadow: 0 0 10px #00ff99;
+    h1 {
+        color: #ff007f;
+        font-size: 28px;
+        margin-bottom: 40px;
     }
-    .login-box {
-      margin-top: 50px;
+    button {
+        font-size: 18px;
+        padding: 10px 20px;
+        margin: 10px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.3s;
     }
-    input[type="password"] {
-      padding: 10px;
-      font-size: 16px;
-      border: none;
-      border-radius: 6px;
-      width: 200px;
-      text-align: center;
+    #yesBtn {
+        background-color: #ff69b4;
+        color: white;
     }
-    .btn {
-      margin-top: 15px;
-      padding: 10px 25px;
-      font-size: 16px;
-      background: linear-gradient(45deg, #00ff99, #00ccff);
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: bold;
+    #yesBtn:hover {
+        background-color: #ff1493;
+        transform: scale(1.1);
     }
-    .btn:hover {
-      transform: scale(1.05);
+    #noBtn {
+        background-color: #d3d3d3;
+        color: #333;
+        position: absolute;
     }
-    .error {
-      color: red;
-      margin-top: 10px;
-      font-size: 14px;
-    }
-    #app-content {
-      display: none;
-    }
-    progress {
-      width: 80%;
-      height: 16px;
-      border-radius: 10px;
-      background: #222;
-    }
-    progress::-webkit-progress-value {
-      background: #00ff99;
-      border-radius: 10px;
-    }
-    progress::-webkit-progress-bar {
-      background: #111;
-      border-radius: 10px;
-    }
-  </style>
+</style>
 </head>
 <body>
-  <img src="hh4x-icon.png" alt="Icon">
-  <h1>HH4X | Regedit iOS Pro</h1>
 
-  <div id="login" class="login-box">
-    <p>🔐 Vui lòng nhập KEY để tiếp tục:</p>
-    <input type="password" id="keyInput" placeholder="Nhập key...">
-    <br>
-    <button class="btn" onclick="checkKey()">Đăng nhập</button>
-    <div class="error" id="errorMsg"></div>
-  </div>
+<h1>💌 Hello bạn gái tôi, nếu bạn cần tôi hãy tắt chế độ không làm phiền 💌</h1>
+<div>
+    <button id="yesBtn">Có 💖</button>
+    <button id="noBtn">Không 😝</button>
+</div>
 
-  <div id="app-content">
-    <h2>🔫 Kích hoạt Regedit</h2>
-    <div><input type="checkbox"> Auto Headshot</div>
-    <div><input type="checkbox"> No Recoil</div>
-    <div><input type="checkbox"> Aim Assist</div>
-    <div><input type="checkbox"> Full Đỏ V2</div>
-    <div><input type="checkbox"> Xuyên Tường</div>
+<script>
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
 
-    <button class="btn" onclick="startFakeHack()">🚀 KÍCH HOẠT</button>
+    yesBtn.addEventListener("click", () => {
+        document.body.innerHTML = `
+            <h1 style="color:#ff1493;">🎉 Thành công rồi đó nhaaa 💕</h1>
+            <p style="font-size:20px;">Bạn gái tôi đã tắt chế độ “Không làm phiền” rồi 😘</p>
+        `;
+    });
 
-    <div class="loading" id="loading">
-      <p>🔄 Đang xử lý cấu hình...</p>
-      <progress max="100" value="0" id="progressBar"></progress>
-    </div>
+    noBtn.addEventListener("mouseover", () => {
+        const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+        const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+        noBtn.style.left = `${x}px`;
+        noBtn.style.top = `${y}px`;
+    });
+</script>
 
-    <div class="success" id="success" style="display:none; color: #00ff00; font-weight: bold; margin-top: 20px;">
-      ✅ KÍCH HOẠT THÀNH CÔNG!<br>
-      📌 Regedit đã áp dụng thành công.
-    </div>
-  </div>
-
-  <script>
-    const correctKey = "giakhanhios";
-    function checkKey() {
-      const userInput = document.getElementById("keyInput").value;
-      const error = document.getElementById("errorMsg");
-      if (userInput === correctKey) {
-        document.getElementById("login").style.display = "none";
-        document.getElementById("app-content").style.display = "block";
-      } else {
-        error.textContent = "❌ Sai key. Vui lòng thử lại.";
-      }
-    }
-
-    function startFakeHack() {
-      const loading = document.getElementById('loading');
-      const success = document.getElementById('success');
-      const bar = document.getElementById('progressBar');
-      let value = 0;
-      loading.style.display = 'block';
-      success.style.display = 'none';
-      bar.value = 0;
-
-      let interval = setInterval(() => {
-        if (value >= 100) {
-          clearInterval(interval);
-          loading.style.display = 'none';
-          success.style.display = 'block';
-        } else {
-          value += 4;
-          bar.value = value;
-        }
-      }, 120);
-    }
-  </script>
 </body>
 </html>
